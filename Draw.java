@@ -29,23 +29,30 @@ public class Draw extends JComponent{
 	}
 
 	public void reloadImage(){
+
+		states++;
+
 		if(states == 0){
 			resource = getClass().getResource("run0.png");
 		}
 		else if(states == 1){
 			resource = getClass().getResource("run1.png");
-			states = 0;
+			
 		} 
 		else if(states == 2){
 			resource = getClass().getResource("run2.png");
-			states = 0;
+			
 		}
 		else if(states == 3){
 			resource = getClass().getResource("run3.png");
-			states = 0;
+			
 		}
 		else if(states == 4){
 			resource = getClass().getResource("run4.png");
+			
+		}
+		else if(states == 5){
+			resource = getClass().getResource("run5.png");
 			states = 0;
 		}
 
@@ -58,38 +65,42 @@ public class Draw extends JComponent{
 		}
 	}
 
+	public void attack(){
+
+		resource = getClass().getResource("Sword.png");
+
+		try{
+			image = ImageIO.read(resource);
+
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+		repaint();
+	}
+
 	public void moveRight(){
 		x = x + 5;
-		states++;
-		reloadImage();
 		repaint();
 	}
 
 	public void moveLeft(){
 		x = x - 5;
-		states++;
-		reloadImage();
 		repaint();
 	}
 
 	public void moveUp(){
 		y = y - 5;
-		states++;
-		reloadImage();
 		repaint();
 	}
 
 	public void moveDown(){
 		y = y + 5;
-		states++;
-		reloadImage();
 		repaint();
 	}
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.setColor(Color.BLUE);
-		g.fillOval(x, y, 50, 50);
 		g.drawImage(image,x,y,this);
 
 	}
