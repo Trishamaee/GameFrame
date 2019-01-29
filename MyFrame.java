@@ -16,6 +16,30 @@ public class MyFrame extends JFrame implements KeyListener{
 			System.out.println("Pos: " + drawing.x + "," + drawing.y);
 			drawing.moveRight();
 		}
+		else if(e.getKeyCode() == KeyEvent.VK_X){
+			System.out.println("Duck");
+			drawing.crouch();
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_W){
+			System.out.println("PAK!");
+			drawing.punch();
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_E){
+			System.out.println("SITDOWN!");
+			drawing.kick();
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_C){
+			System.out.println("!");
+			drawing.smrslt();
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_Q){
+			System.out.println("Attack with a Bow");
+			drawing.bow();
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_R){
+			System.out.println("Ughhhhh");
+			drawing.dropkick();
+		}
 		else if(e.getKeyCode() == KeyEvent.VK_DOWN){
 			System.out.println("Pos: " + drawing.x + "," + drawing.y);
 			drawing.moveDown();
@@ -32,6 +56,7 @@ public class MyFrame extends JFrame implements KeyListener{
 			System.out.println("attack");
 			drawing.attack();
 		}
+		
 		drawing.reloadImage();
 	}
 
@@ -48,7 +73,7 @@ public class MyFrame extends JFrame implements KeyListener{
 		MyFrame gameFrame = new MyFrame();
 		
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gameFrame.setSize(600, 600);
+		gameFrame.setSize(640, 400);
 		gameFrame.setVisible(true);
 		gameFrame.getContentPane().add(gameFrame.drawing);
 		gameFrame.addKeyListener(gameFrame);

@@ -9,11 +9,12 @@ import javax.imageio.ImageIO;
 public class Draw extends JComponent{
 
 	private BufferedImage image;
-	private URL resource = getClass().getResource("run0.png");
+	private BufferedImage backgroundImage;
+	public URL resource = getClass().getResource("run0.png");
 
 	//CIRCLE'S POSITION
 	public int x = 50;
-	public int y = 50;
+	public int y = 285;
 
 	//animation states
 	public int states = 0;
@@ -21,7 +22,7 @@ public class Draw extends JComponent{
 	public Draw(){
 		try{
 			image = ImageIO.read(resource);
-
+			backgroundImage = ImageIO.read(getClass().getResource("Bg.jpg"));
 		}
 		catch(IOException e){
 			e.printStackTrace();
@@ -65,18 +66,278 @@ public class Draw extends JComponent{
 		}
 	}
 
+	public void attackAnimation(){
+		Thread thread1 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 5; ctr++){
+					try{
+						if(ctr==4){
+							resource = getClass().getResource("run1.png");
+						}
+						else{
+							resource = getClass().getResource("attack"+ctr+".png");
+						}
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+						repaint();
+						Thread.sleep(100);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread1.start();
+
+	}
+
+	public void jumpAnimation(){
+		Thread thread2 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 5; ctr++){
+					try{
+						if(ctr==4){
+							resource = getClass().getResource("run1.png");
+							y = y - 15;
+						}
+						else{
+							resource = getClass().getResource("jump"+ctr+".png");
+							
+						}
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+						repaint();
+						Thread.sleep(100);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread2.start();
+
+	}
+
+	public void crouchAnimation(){
+		Thread thread3 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 5; ctr++){
+					try{
+						if(ctr==4){
+							resource = getClass().getResource("run1.png");
+						}
+						else{
+							resource = getClass().getResource("crouch"+ctr+".png");
+						}
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+						repaint();
+						Thread.sleep(80);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread3.start();
+
+	}
+
+	public void bowAnimation(){
+		Thread thread4 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 9; ctr++){
+					try{
+						if(ctr==8){
+							resource = getClass().getResource("run1.png");
+						}
+						else{
+							resource = getClass().getResource("bow"+ctr+".png");
+						}
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+						repaint();
+						Thread.sleep(80);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread4.start();
+
+	}
+
+	public void punchAnimation(){
+		Thread thread5 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 14; ctr++){
+					try{
+						if(ctr==13){
+							resource = getClass().getResource("run1.png");
+						}
+						else{
+							resource = getClass().getResource("punch"+ctr+".png");
+						}
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+						repaint();
+						Thread.sleep(80);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread5.start();
+
+	}
+
+	public void kickAnimation(){
+		Thread thread6 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 9; ctr++){
+					try{
+						if(ctr==8){
+							resource = getClass().getResource("run1.png");
+						}
+						else{
+							resource = getClass().getResource("kick"+ctr+".png");
+						}
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+						repaint();
+						Thread.sleep(80);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread6.start();
+
+	}
+
+	public void fallAnimation(){
+		Thread thread7 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 9; ctr++){
+					try{
+						if(ctr==8){
+							resource = getClass().getResource("walk0.png");
+							y = y + 15;
+						}
+						else{
+							resource = getClass().getResource("fall"+ctr+".png");
+						}
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+						repaint();
+						Thread.sleep(100);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread7.start();
+
+	}
+
+	public void smrsltAnimation(){
+		Thread thread8 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 5; ctr++){
+					try{
+						if(ctr==4){
+							resource = getClass().getResource("run1.png");
+							y = y + 20;
+						}
+						else{
+							resource = getClass().getResource("smrslt"+ctr+".png");
+							y = y - 5;
+						}
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+						repaint();
+						Thread.sleep(100);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread8.start();
+
+	}
+
+	public void dropkickAnimation(){
+		Thread thread9 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 5; ctr++){
+					try{
+						if(ctr==4){
+							resource = getClass().getResource("run1.png");
+							y = y + 20;
+						}
+						else{
+							resource = getClass().getResource("dropkick"+ctr+".png");
+							y = y - 5;
+							x = x + 15;
+							
+						}
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+						repaint();
+						Thread.sleep(100);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread9.start();
+
+	}
+
 	public void attack(){
-
-		resource = getClass().getResource("Sword.png");
-
-		try{
-			image = ImageIO.read(resource);
-
-		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
-		repaint();
+		attackAnimation();
 	}
 
 	public void moveRight(){
@@ -90,18 +351,46 @@ public class Draw extends JComponent{
 	}
 
 	public void moveUp(){
-		y = y - 5;
-		repaint();
+		/*y = y - 5;
+		repaint();*/
+		jumpAnimation();
 	}
 
 	public void moveDown(){
-		y = y + 5;
-		repaint();
+		/*y = y + 5;
+		repaint();*/
+		fallAnimation();
+	}
+
+	public void crouch(){
+		crouchAnimation();
+	}
+
+	public void bow(){
+		bowAnimation();
+	}
+
+	public void punch(){
+		punchAnimation();
+	}
+
+	public void kick(){
+		kickAnimation();
+	}
+
+	public void smrslt(){
+		smrsltAnimation();
+	}
+
+	public void dropkick(){
+		dropkickAnimation();
 	}
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		g.drawImage(backgroundImage, 0, 0, this);
 		g.drawImage(image,x,y,this);
+
 
 	}
 }
