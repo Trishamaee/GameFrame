@@ -1,10 +1,11 @@
 import javax.swing.JComponent;
+import javax.swing.Timer;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.net.URL;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 import java.util.Random;
 
 public class Draw extends JComponent{

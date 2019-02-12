@@ -7,15 +7,18 @@ import java.net.URL;
 import javax.swing.JComponent;
 
 public class Monster{
-
+	
 	public int xPos = 150;
 	public int yPos = 300;
 	public int width = 0;
 	public int height = 0;
 	public int life = 20;
+	public boolean idle = true;
+	public boolean alive = true;
+	public boolean contact = false;
 
 	public BufferedImage image;
-	public URL resource = getClass().getResource("slimeidle0.png");
+	public URL resource = getClass().getResource("idle0.png");
 
 	public Monster(Draw comp){
 		try{
@@ -48,14 +51,14 @@ public class Monster{
 	public void animate(Draw compPass){
 		Thread monThread = new Thread(new Runnable(){
 			public void run(){
-				
+				while(idle){
 					for(int ctr = 0; ctr < 5; ctr++){
 						try {
 							if(ctr==4){
-								resource = getClass().getResource("slime/idle0.png");
+								resource = getClass().getResource("idle0.png");
 							}
 							else{
-								resource = getClass().getResource("slime/idle"+ctr+".png");
+								resource = getClass().getResource("idle"+ctr+".png");
 							}
 							
 							try{
@@ -71,6 +74,11 @@ public class Monster{
 							e.printStackTrace();
 						}
 					}
+
+					if(life<=0){
+						die(compPass);
+					}
+				}
 			}
 		});
 		monThread.start();
@@ -93,9 +101,11 @@ public class Monster{
 	}
 
 	public void die(Draw compPass){
+		idle = false;
+		if(alive){
 			Thread monThread = new Thread(new Runnable(){
 				public void run(){
-					for(int ctr = 0; ctr < 4; ctr++){
+					for(int ctr = 0; ctr < 5; ctr++){
 						try {					
 							resource = getClass().getResource("slimedie"+ctr+".png");
 							
@@ -115,5 +125,6 @@ public class Monster{
 			});
 			monThread.start();
 		}
+		alive = false;
 	}
-
+}
