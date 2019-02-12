@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.util.Random;
 
 public class Draw extends JComponent{
 
@@ -19,13 +20,53 @@ public class Draw extends JComponent{
 	//animation states
 	public int states = 0;
 
+	// randomizer
+	public Random randomizer;
+
+	// enemy
+	public int enemyCount;
+	Monster[] monsters = new Monster[10];
+
 	public Draw(){
+		randomizer = new Random();
+		spawnEnemy();
+
 		try{
 			image = ImageIO.read(resource);
 			backgroundImage = ImageIO.read(getClass().getResource("Bg.jpg"));
 		}
 		catch(IOException e){
 			e.printStackTrace();
+		}
+
+		startGame();
+	}
+
+	public void startGame(){
+		Thread gameThread = new Thread(new Runnable(){
+			public void run(){
+				while(true){
+					try{
+						for(int c = 0; c < monsters.length; c++){
+							if(monsters[c]!=null){
+								monsters[c].moveTo(x,y);
+								repaint();
+							}
+						}
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+							e.printStackTrace();
+					}
+				}
+			}
+		});
+		gameThread.start();
+	}
+
+	public void spawnEnemy(){
+		if(enemyCount < 10){
+			monsters[enemyCount] = new Monster(randomizer.nextInt(500), randomizer.nextInt(500), this);
+			enemyCount++;
 		}
 	}
 
@@ -89,6 +130,7 @@ public class Draw extends JComponent{
 						e.printStackTrace();
 					}
 				}
+				
 			}
 		});
 		thread1.start();
@@ -391,6 +433,16 @@ public class Draw extends JComponent{
 		g.drawImage(backgroundImage, 0, 0, this);
 		g.drawImage(image,x,y,this);
 
+		for(int c = 0; c < monsters.length; c++){
+			if(monsters[c]!=null){
+				// character grid for monsters
+				// g.setColor(Color.BLUE);
+				// g.fillRect(monsters[c].xPos, monsters[c].yPos+5, monsters[c].width, monsters[c].height);
+				g.drawImage(monsters[c].image, monsters[c].xPos, monsters[c].yPos, this);
+				g.setColor(Color.GREEN);
+				g.fillRect(monsters[c].xPos+7, monsters[c].yPos, monsters[c].life, 2);
+			}	
+		}
 
 	}
 }
