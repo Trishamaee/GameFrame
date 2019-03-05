@@ -60,8 +60,7 @@ public class MyFrame extends JFrame implements KeyListener{
 			drawing.spawnEnemy();
 		}
 
-		
-		drawing.reloadImage();
+	
 	}
 
 	public void keyReleased(KeyEvent e){

@@ -107,7 +107,7 @@ public class Monster{
 				public void run(){
 					for(int ctr = 0; ctr < 5; ctr++){
 						try {					
-							resource = getClass().getResource("slimedie"+ctr+".png");
+							resource = getClass().getResource("die"+ctr+".png");
 							
 							try{
 								image = ImageIO.read(resource);
