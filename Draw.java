@@ -7,6 +7,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.Random;
+import java.io.*;
+import java.io.File;
+import javax.sound.sampled.*;
+
 
 public class Draw extends JComponent{
 
@@ -20,6 +24,7 @@ public class Draw extends JComponent{
 	public int y = 285;
 	public int height = 0;
 	public int width = 0;
+	public int life = 50;
 
 	public boolean brun = false;
 	public boolean right = true;
@@ -545,6 +550,10 @@ public class Draw extends JComponent{
 		super.paintComponent(g);
 		g.drawImage(backgroundImage, 0, 0, this);
 		g.drawImage(image,x,y,this);
+		g.setColor(Color.RED);
+		g.fillRect(x+15,y,25,2);
+		g.setColor(Color.BLUE);
+		g.fillRect(x+15,y+2,10,2);
 
 		for(int c = 0; c < monsters.length; c++){
 			if(monsters[c]!=null){
@@ -557,5 +566,20 @@ public class Draw extends JComponent{
 			}	
 		}
 
+	}
+
+	public static void main(String[] args){
+		try{
+			AudioInputStream bg = AudioSystem.getAudioInputStream(new File("HappyAdventure.wav"));
+
+			Clip clip = AudioSystem.getClip();
+			clip.open(bg);
+
+			clip.start();
+
+			for (int i=0; i<30000; i++)
+			System.out.println("");
+
+		}catch(Exception e){e.printStackTrace();}
 	}
 }
