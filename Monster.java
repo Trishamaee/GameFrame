@@ -84,6 +84,38 @@ public class Monster{
 		monThread.start();
 	}
 
+	public void slimeattack(Draw comPass){
+		Thread thread10 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 5; ctr++){
+					try{
+						if(ctr==4){
+							resource = getClass().getResource("sattack.png");
+							
+						}
+						else{
+							resource = getClass().getResource("sattack"+ctr+".png");
+							
+							
+						}
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+						comPass.repaint();
+						Thread.sleep(100);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread10.start();
+
+	}
+
 	public void moveTo(int toX, int toY){
 		if(xPos<toX){
 			xPos++;

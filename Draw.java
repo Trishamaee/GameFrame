@@ -42,6 +42,7 @@ public class Draw extends JComponent{
 	Monster[] monsters = new Monster[10];
 
 	public Draw(){
+
 		randomizer = new Random();
 		spawnEnemy();
 
@@ -79,7 +80,7 @@ public class Draw extends JComponent{
 
 	public void spawnEnemy(){
 		if(enemyCount < 10){
-			monsters[enemyCount] = new Monster(randomizer.nextInt(250), randomizer.nextInt(250), this);
+			monsters[enemyCount] = new Monster(randomizer.nextInt(250), randomizer.nextInt(100), this);
 			enemyCount++;
 		}
 	}
@@ -519,22 +520,26 @@ public class Draw extends JComponent{
 				if(yChecker > monsters[x].yPos){
 					if(yChecker-monsters[x].yPos < monsters[x].height){
 						collideY = true;
+						System.out.println("collideY");
 					}
 				}
 				else{
-					if(monsters[x].yPos - yChecker < monsters[x].height){
+					if(monsters[x].yPos - (yChecker+height) < monsters[x].height){
 						collideY = true;
+						System.out.println("collideY");
 					}
 				}
 
 				if(xChecker > monsters[x].xPos){
-					if(xChecker-monsters[x].xPos < monsters[x].width){
+					if((xChecker-width)-monsters[x].xPos < monsters[x].width){
 						collideX = true;
+						System.out.println("collideX");
 					}
 				}
 				else{
-					if(monsters[x].xPos - xChecker < 5){
+					if(monsters[x].xPos-xChecker < monsters[x].width){
 						collideX = true;
+						System.out.println("collideX");
 					}
 				}
 			}
@@ -542,6 +547,7 @@ public class Draw extends JComponent{
 			if(collideX && collideY){
 				System.out.println("collision!");
 				monsters[x].contact = true;
+				monsters.slimeattack();
 			}
 		}
 	}
@@ -568,18 +574,14 @@ public class Draw extends JComponent{
 
 	}
 
-	public static void main(String[] args){
-		try{
-			AudioInputStream bg = AudioSystem.getAudioInputStream(new File("HappyAdventure.wav"));
-
-			Clip clip = AudioSystem.getClip();
-			clip.open(bg);
-
-			clip.start();
-
-			for (int i=0; i<30000; i++)
-			System.out.println("");
-
-		}catch(Exception e){e.printStackTrace();}
+	public void checkDeath(){
+		for(int c = 0; c < monsters.length; c++){
+			if(monsters[c]!=null){
+				if(!monsters[c].alive){
+					monsters[c] = null;
+				}
+			}			
+		}
 	}
+
 }
